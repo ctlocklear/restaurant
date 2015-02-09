@@ -3,8 +3,11 @@ require 'active_record'
 Bundler.require 
 require 'pry'
 
-
-ActiveRecord::Base.establish_connection({adapter: 'postgresql', database: 'restaurants'})
+if `whoami`.chomp == 'clocklear'
+	ActiveRecord::Base.establish_connection({adapter: 'postgresql', database: 'restaurants', host: 'localhost', port: 5432})
+else
+	ActiveRecord::Base.establish_connection({adapter: 'postgresql', database: 'restaurants'})
+end
 
 require_relative 'models/food'
 require_relative 'models/order'

@@ -14,7 +14,47 @@ port: 5432
 )
 #Pry.start(binding)
 
+ActiveRecord::Base.connection.execute(<<-SQL)
+  DROP TABLE IF EXISTS foods;
+  CREATE TABLE foods
+  (
+    id serial NOT NULL,
+    name text,
+    cuisine text,
+    price integer,
+    allergens text,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    CONSTRAINT foods_pkey PRIMARY KEY (id)
+  );
+SQL
 
+ActiveRecord::Base.connection.execute(<<-SQL)
+  DROP TABLE IF EXISTS orders;
+  CREATE TABLE orders
+  (
+    id serial NOT NULL,
+    food_id integer,
+    party_id integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    CONSTRAINT orders_pkey PRIMARY KEY (id)
+  )
+SQL
+
+ActiveRecord::Base.connection.execute(<<-SQL)
+  DROP TABLE parties;
+  CREATE TABLE parties
+  (
+    id serial NOT NULL,
+    table_number integer,
+    guests integer,
+    paid boolean,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    CONSTRAINT parties_pkey PRIMARY KEY (id)
+  )
+SQL
 
 [
   {

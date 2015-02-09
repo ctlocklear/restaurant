@@ -9,8 +9,6 @@ end
 ActiveRecord::Base.establish_connection(
 adapter: "postgresql",
 database: "restaurants",
-host: "localhost",
-port: 5432
 )
 #Pry.start(binding)
 
@@ -43,7 +41,7 @@ ActiveRecord::Base.connection.execute(<<-SQL)
 SQL
 
 ActiveRecord::Base.connection.execute(<<-SQL)
-  DROP TABLE parties;
+  DROP TABLE IF EXISTS parties;
   CREATE TABLE parties
   (
     id serial NOT NULL,

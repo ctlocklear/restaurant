@@ -1,0 +1,16 @@
+<h2>Add a new party!</h2>
+
+<form action="/parties" method="POST">
+	<intput type="text" name ="new_parties">
+
+<label for="guests">Guests</label>
+<input id="guests" type="text" name="party[guest]" value="<%= @parties.guests %>"><br>
+
+<label for="table_number">Table_Number</label>
+<input id="table_number" type="text" name="party[table_number]" value="<%= @parties.table_number %>"><br>
+
+<label for="paid">paid</label>
+<input id="paid" type="integer" name="party[paid]" value="<%= @parties.paid %>"><br>
+
+<input type="submit">
+</form>

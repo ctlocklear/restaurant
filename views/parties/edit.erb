@@ -1,0 +1,18 @@
+<h2>Editing <%= @parties.table_number %></h2>
+
+
+
+<form action="/parties/<%= @parties.id %>" method="POST">
+Table_Number: <input type="text" name='party[table_number]' value="<%= @parties.table_number %>"><br>
+Guests: <input type="text" name='party[guests]' value="<%= @parties.guests %>"><br>
+Paid: <input type="text" name='party[paid]' value="<%= @parties.paid %>"><br>
+ 
+
+<input type="hidden" name="_method" value="patch">
+<input type="submit">
+</form>
+
+<form action="/parties/<%= @parties.id %>" method="POST">
+<input type="hidden" name="_method" value="DELETE">
+<input type="submit" value="Delete Food">
+</form> 

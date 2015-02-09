@@ -1,0 +1,15 @@
+<h2>Parties</h2>
+
+
+<ul>
+	<% @parties.each do |party| %>
+	<li>
+		<a href="/foods/<%= party.id %>">
+		<%= party.table_number %></a>
+	</li>
+	<% end %>
+
+
+
+
+</ul>

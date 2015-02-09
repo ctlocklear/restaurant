@@ -1,0 +1,15 @@
+<h2>Add a new order!</h2>
+
+<form action="/orders" method="POST">
+	<intput type="text" name ="new_orders">
+
+<label for="food_id">Food</label>
+<input id="food_id" type="text" name="order[food_id]" value="<%= @orders.food_id %>"><br>
+
+<label for="party_id">Party</label>
+<input id="party_id" type="text" name="order[party_id]" value="<%= @orderss.party_id %>"><br>
+
+
+
+<input type="submit">
+</form>

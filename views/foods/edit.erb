@@ -1,0 +1,18 @@
+<h2>Edit this food item!</h2>
+
+
+
+<form action="/foods/:id" method="POST">
+Name: <input type="text" name='food[name]'><br>
+Cuisine: <input type="text" name='food[cuisine]'><br>
+Price: <input type="text" name='food[price]'<br>
+Allergens: <input type="text" name='food[allergens]'><br>
+
+<input type="hidden" name="_method" value="patch">
+<input type="submit">
+</form>
+
+<form action="/foods/:id" method="POST">
+<input type="hidden" name="_method" value="DELETE">
+<input type="submit" value="Delete Food">
+</form> 

@@ -1,0 +1,19 @@
+<h2><%= @parties.all %></h2>
+<h3>Restaurant Parties!</h3>
+<ul>
+  <li>Table_Number: <%= @parties.table_number %></li>
+  <li>Guests: <%= @foods.guests %></li>
+  <li>Paid: <%= @foods.paid %></li>
+</ul>
+
+<ul>
+	<% @parties.each do |party| %>
+	<li><a href="/parties/<%= party.id %>">
+		<%= parties.table_number %></a>
+	</li>
+	<% end %>
+
+
+<a href="/parties/<%= @parties.id %>/edit">Edit Parties</a>
+
+ 

@@ -1,17 +1,15 @@
-<h3>Menu</h3>
-<ul>
-  <li>Item: <%= @foods.name %></li>
-  <li>Cuisine: <%= @foods.cuisine %></li>
-  <li>Price: <%= @foods.price %></li>
-  <li>Allergens: <%= @foods.allergens %></li>
+<h3><a href="/foods">Menu</a></h3>
+<ul class="menu-detail-list">
+  <li>Item: <%= @food.name %></li>
+  <li>Cuisine: <%= @food.cuisine %></li>
+  <li>Price: <%= @food.price %></li>
+  <li>Allergens: <%= @food.allergens %></li>
 </ul>
 
 <ul>
-	<% @foods.each do |food| %>
-	<li><a href="/foods/<%= food.id %>">
-		<%= foods.name %></a>
+	<li><a href="/foods/<%= @food.id %>">
+		<%= @food.name %></a>
 	</li>
-	<% end %>
 
 
 <a href="/foods/<%= @food.id %>/edit">Edit Foods</a>

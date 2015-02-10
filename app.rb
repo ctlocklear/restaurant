@@ -15,7 +15,7 @@ require_relative 'models/party'
 
 
 get '/' do
-	'Welcome to my restaurant!'
+	erb :'/welcome'
 end
 
 get '/foods' do 
@@ -23,17 +23,15 @@ get '/foods' do
 	erb :'foods/index'
 end 
 
-
- # get '/foods/:id' do 
- # food_id = params['id']
- # @foods = Food.find(food_id)
-
- #  erb :'/foods/show'
- #  end
-
-get '/foods/new' do 
-	@foods = Food.all
+get '/foods/new' do
+	@food = Food.new
 	erb :'/foods/new'
+ end
+
+ get '/foods/:id' do 
+ 	@food = Food.find(params['id'])
+
+ 	erb :'/foods/show'
  end
 
 post '/foods' do
@@ -43,83 +41,95 @@ post '/foods' do
 	@price = params["food"]["price"]
 	@allergens = params["food"]["allergens"]
 
-	@foods = Food.create({name: "#{@name}", cuisine: "#{@cuisine}", price: "#{@price}", allergens: "#{@allergens}"})
-  redirect to '/foods'
+	@food = Food.new({name: "#{@name}", cuisine: "#{@cuisine}", price: "#{@price}", allergens: "#{@allergens}"})
+	if @food.save
+		redirect to '/foods'
+	else
+		erb :'/foods/new'
+	end
 end
 
-#  get 'foods/:id/edit' do 
-#  	@foods= Food.find(params['id'])
-#  	erb :'foods/edit'
-# end
+get '/foods/:id/edit' do 
+ 	@food= Food.find(params['id'])
+ 	erb :'foods/edit'
+end
 
-#  patch '/foods/:id' do 
-#  	food = Food.find(params[:id])
-#  	food.update(params[:id])
+  patch '/foods/:id' do 
+  	food = Food.find(params[:id])
+ 	food.update(params['food'])
+ 	redirect to "/foods/#{food.id}"
+ end
 
-#  	redirect to "/foods/#{food.id}"
-# end
+  delete '/foods/:id' do 
+ 	food = Food.find(params[:id])
+ 	food.destroy
+ 	redirect to '/foods'
+ end
 
-#  	redirect to '/foods/#{food.id}'
-# end
+ get '/parties' do 
+ 	@parties = Party.all
 
-#  delete '/foods/:id' do 
-#  	food = Food.find(params[:id])
-#  	food.destory
+ 	erb :'parties/index'
+ end
 
-#  	redirect to '/foods'
-#  end
+  get '/parties/new' do  
+ 	@party = Party.all
 
-#  get '/parties' do 
-#  	@parties = Party.all
+ 	erb :'parties/new'
+ end
 
-#  	erb :'parties/index'
-#  end
+ get '/parties/:id' do 
+ 	#Pry.start(binding)
+ 	@party = Party.find(params[:id])
+ 	@foods = Food.all
+ 	erb :'parties/show'
+ end
 
-#  get '/parties/:id' do 
-#  	@parties = Party.find(params[:id])
+post '/parties/:id' do
+	food_id = params["food_id"]
+	party_id = params["id"]
 
-#  	erb :'parties/show'
-#  end
+end 
 
-#  get '/parties/new' do  
-#  	@parties = Party.all
+post '/parties' do  
+	@guests = params["party"]["guest"]
+	@table_number = params["party"]["table_number"]
+	@paid = params["party"]["paid"]
+	@party = Party.new({guests: "#{@guests}", table_number: "#{@table_number}", paid: "#{@paid}"})
+	if @party.save
+		redirect to '/parties'
+	else
+		erb :'/parties/new'
+	end
+end
 
-#  	erb :'parties/new'
-#  end
+get '/parties/:id/edit' do 
+	@party = Party.find(params['id'])
 
-# post '/parties' do  
-# 	new_parties = params['new_parties']
-# 	@parties = Party.create({name: new_parties})
+ 	erb :'parties/edit'
+end
 
-#   redirect to '/parties'
-# end
+patch '/parties/:id' do 
+	party = Party.find(params[:id])
+ 	party.update(params['party'])
 
-# get '/parties/:id/edit' do 
-# 	@parties = Party.find(params['id')
+ 	redirect to "/parties/#{party.id}"
+end
 
-#  	erb :'parties/edit'
-# end
+delete '/parties/:id' do 
+	party = Party.find(params[:id])
+ 	party.destroy
+ 	redirect to '/parties'
+end 
 
-# patch '/parties/:id' do 
-# 	party = Party.find(params[:id])
-#  	party.update(params[:table_number])
-
-#  	redirect to '/parties/#{party.id}'
-# end
-
-# delete '/parties/:id' do 
-# 	party = Party.find(params[:id])
-#  	party.destory
-
-#  	redirect to '/parties'
-# end
-
-# post '/orders' do 
-# 	new_orders = params['new_orders']
-# 	@orders = Order.create({name: new_orders})
-
-# 	erb :'order/new'
-# end
+post '/orders' do
+	@order = Order.new(params[:order])
+	if @order.save
+		redirect to "/parties/#{@order.party_id}"
+	else
+		erb :'parties/show'
+	end
+end
 
 # patch '/orders/:id' do 
 # 	@orders = Order.find(params['id')
@@ -128,17 +138,22 @@ end
 	
 # end
 
-# delete '/orders/:id' do 
-# 	order = Order.find(params[:id])
-#  	order.destory
-
-#  	redirect to '/orders'
-# end
+delete '/orders/:id' do 
+	order = Order.find(params[:id])
+ 	order.destroy
+ 	redirect to '/orders'
+end
 
 # get '/parties/:id/receipt' do 
 # end
 
 # patch '/parties/:id/checkout' do 
+
+
+# get '/download/:filename' do |filename|
+#  send_file "./files/#{filename}", :filename => filename, :type => 'Application/octet-stream'
+# end
+
 
 # GET | / | Displays links to navigate the application (including links to each current parties)
 # GET | /foods | Display a list of food items available

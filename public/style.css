@@ -1,0 +1,26 @@
+body {
+	background:url('images/pattern.jpg');
+	font-family: 'Cabin', sans-serif;
+	
+}
+
+#welcome_page {
+	text-align: left;
+
+}
+#menu_index a {
+	color: white;
+
+
+}
+
+.container img{
+	position: relative;
+	height: 60;
+
+
+}
+.menu-detail-list {
+	background-color: lightgray;
+	width: 200;
+}

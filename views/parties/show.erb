@@ -1,19 +1,34 @@
-<h2><%= @parties.all %></h2>
 <h3>Restaurant Parties!</h3>
 <ul>
-  <li>Table_Number: <%= @parties.table_number %></li>
-  <li>Guests: <%= @foods.guests %></li>
-  <li>Paid: <%= @foods.paid %></li>
+  <li>Table_Number: <%= @party.table_number %></li>
+  <li>Guests: <%= @party.guests %></li>
+  <li>Paid: <%= @party.paid %></li>
 </ul>
 
 <ul>
-	<% @parties.each do |party| %>
-	<li><a href="/parties/<%= party.id %>">
-		<%= parties.table_number %></a>
+	<li><a href="/parties/<%= @party.id %>">
+		<%= @party.table_number %></a>
 	</li>
-	<% end %>
 
 
-<a href="/parties/<%= @parties.id %>/edit">Edit Parties</a>
 
- 
+<a href="/parties/<%= @party.id %>/edit">Edit Parties</a>
+
+
+
+<h2>Add a new order!</h2>
+
+<form action="/orders" method="POST">
+	<input type="hidden" name="order[party_id]" value="<%= @party.id %>" />
+<select name="order[food_id]">
+	<% @foods.each do |food| %>
+	<option value="<%= food.id %>"><%=food.name %></option>
+	<% end %> 	
+</select>
+
+
+
+
+ <input type="submit">
+</form>
+

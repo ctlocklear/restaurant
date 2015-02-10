@@ -1,6 +1,7 @@
 body {
-	background:url('images/pattern.jpg');
+	background:url('images/wood.jpg');
 	font-family: 'Cabin', sans-serif;
+	color: white
 	
 }
 
@@ -21,6 +22,5 @@ body {
 
 }
 .menu-detail-list {
-	background-color: lightgray;
-	width: 200;
+	outline-color: white;
 }

@@ -125,13 +125,13 @@ end
 post '/orders' do
 	@order = Order.new(params[:order])
 	if @order.save
-		redirect to "/parties/#{@order.party_id}"
+		redirect to "/parties"
 	else
 		erb :'parties/show'
 	end
 end
 
-# patch '/orders/:id' do 
+ #patch '/orders/:id' do 
 # 	@orders = Order.find(params['id')
 
 #  	erb :'orders/edit'

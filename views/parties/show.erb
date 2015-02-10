@@ -1,4 +1,5 @@
-<h3>Restaurant Parties!</h3>
+<h1>The Rustic Cafe</h1>
+<h3>Restaurant Parties</h3>
 <ul>
   <li>Table_Number: <%= @party.table_number %></li>
   <li>Guests: <%= @party.guests %></li>
@@ -16,7 +17,7 @@
 
 
 
-<h2>Add a new order!</h2>
+<h2>Add a new order to this party!</h2>
 
 <form action="/orders" method="POST">
 	<input type="hidden" name="order[party_id]" value="<%= @party.id %>" />
@@ -25,10 +26,19 @@
 	<option value="<%= food.id %>"><%=food.name %></option>
 	<% end %> 	
 </select>
-
-
-
+<select name="order[food_id]">
+	<% @foods.each do |food| %>
+	<option value="<%= food.id %>"><%=food.name %></option>
+	<% end %> 	
+</select>
+<select name="order[food_id]">
+	<% @foods.each do |food| %>
+	<option value="<%= food.id %>"><%=food.name %></option>
+	<% end %> 	
+</select>
 
  <input type="submit">
 </form>
+
+
 
